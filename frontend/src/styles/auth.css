@@ -1,0 +1,146 @@
+.auth {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  min-height: 100vh;
+}
+
+.auth__aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 48px;
+  color: #f2f6f4;
+  background: linear-gradient(160deg, #2f5d50 0%, #24493f 55%, #1b3830 100%);
+}
+
+.auth__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+}
+
+.auth__brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.auth__brand-name {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.auth__aside-text {
+  max-width: 34ch;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(242, 246, 244, 0.92);
+}
+
+.auth__features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(242, 246, 244, 0.78);
+}
+
+.auth__features li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.auth__features li::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(242, 246, 244, 0.55);
+}
+
+.auth__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 24px;
+}
+
+.auth__card {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 34px 30px;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.auth__header {
+  margin-bottom: 24px;
+}
+
+.auth__title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.auth__subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.auth__footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.auth__note {
+  font-size: 12px;
+  color: #98927f;
+}
+
+@media (max-width: 860px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .auth__aside {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .auth__aside-text,
+  .auth__features {
+    display: none;
+  }
+
+  .auth__main {
+    padding: 24px 16px 40px;
+  }
+
+  .auth__card {
+    max-width: 460px;
+    padding: 28px 22px 24px;
+  }
+}

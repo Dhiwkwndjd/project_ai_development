@@ -1,0 +1,93 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.home__content {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 44px 24px 64px;
+}
+
+.home__card {
+  padding: 36px 34px;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.home__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.home__title {
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.home__lead {
+  max-width: 56ch;
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.home__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.home__detail {
+  padding: 14px 16px;
+  background-color: var(--surface-muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.home__detail dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.home__detail dd {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.home__note {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+  .home__content {
+    padding: 24px 16px 40px;
+  }
+
+  .home__card {
+    padding: 24px 20px;
+  }
+
+  .home__title {
+    font-size: 22px;
+  }
+}
