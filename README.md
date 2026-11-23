@@ -52,3 +52,9 @@ npm run dev
 | Администратор | `admin@library.local` |
 | Библиотекарь | `librarian1@library.local` |
 | Читатель | `reader1@library.local` |
+
+## Документация
+
+- `docs/SPEC.md` — требования, `docs/PLAN.md` — план, `docs/AI_LOG.md` — журнал работ, `docs/AI_REVIEW.md` — аудит.
+- `prompts/PROMPTS_LOG.md` — читаемый журнал промптов и ответов.
+- `prompts/` — полные экспорты сессий (`*.json`, `*.txt`), не редактируются.

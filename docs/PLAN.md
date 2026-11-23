@@ -8,7 +8,7 @@
 
 1. Один заход агента = одна задача из плана.
 2. После задачи: тесты зелёные → коммит → запись в `docs/AI_LOG.md` → экспорт
-   сессии в `docs/prompts/`.
+   сессии в `prompts/` и запись в `prompts/PROMPTS_LOG.md`.
 3. Сначала backend и тесты, потом UI.
 4. Правила (права, статусы, конфликты, очередь) — только на backend.
 5. Задача считается выполненной после ручной проверки, а не после ответа агента.
@@ -29,7 +29,8 @@ project_ai/
 ├── frontend/
 │   ├── package.json, vite.config.js, .env.example
 │   └── src/{api,auth,components,pages}
-├── docs/                SPEC, PLAN, AI_LOG, AI_REVIEW, prompts/
+├── docs/                SPEC, PLAN, AI_LOG, AI_REVIEW
+├── prompts/             PROMPTS_LOG.md, полные экспорты сессий
 ├── AGENTS.md
 ├── README.md
 └── .gitignore
@@ -80,7 +81,7 @@ project_ai/
 - **Готово:** вход и выход через UI.
 
 **Итог недели 1:** авторизация, роли, схема БД, демо-данные, 7+ тестов,
-начат `AI_LOG.md`, сессии в `docs/prompts/`.
+начат `AI_LOG.md`, сессии в `prompts/`.
 
 ## 3. Неделя 2 — каталог, брони, очередь
 
