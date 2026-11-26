@@ -9,7 +9,7 @@ from rest_framework import serializers
 from catalog.availability import describe
 from catalog.models import Book, BookCopy
 from reservations.services import queue_position, queue_state
-
+from django.utils import timezone
 
 class BookListSerializer(serializers.ModelSerializer):
     total_copies = serializers.IntegerField(read_only=True)
@@ -100,11 +100,20 @@ class BookDetailSerializer(serializers.ModelSerializer):
             "hold_until": reservation.hold_until,
         }
 
+MIN_BOOK_YEAR = 1000
 
 class BookWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ("id", "title", "author", "genre", "year", "description", "cover_url", "is_active")
+
+    def validate_year(self, value):
+        current_year = timezone.localdate().year
+        if value is not None and not MIN_BOOK_YEAR <= value <= current_year:
+            raise serializers.ValidationError(
+                f"Год должен быть от {MIN_BOOK_YEAR} до {current_year}"
+            )
+        return value
 
 
 class BookCopySerializer(serializers.ModelSerializer):
