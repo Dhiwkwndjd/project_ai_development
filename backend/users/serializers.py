@@ -2,6 +2,7 @@
 
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import ActivityLog, User
@@ -13,8 +14,20 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "email", "full_name", "phone", "role", "is_active")
         read_only_fields = fields
 
+def unique_email_field():
+    """Email уникален без учёта регистра: Ivan@x.com и ivan@x.com — один адрес."""
+    return serializers.EmailField(
+        validators=[
+            UniqueValidator(
+                queryset=User.objects.all(),
+                lookup="iexact",
+                message="Пользователь с таким email уже существует",
+            )
+        ]
+    )
 
 class RegisterSerializer(serializers.ModelSerializer):
+    email = unique_email_field()
     password = serializers.CharField(
         write_only=True, validators=[validate_password], style={"input_type": "password"}
     )
@@ -48,6 +61,7 @@ class AdminUserSerializer(serializers.ModelSerializer):
 class LibrarianCreateSerializer(serializers.ModelSerializer):
     """Создание библиотекаря администратором. Роль задаёт сервер."""
 
+    email = unique_email_field()
     password = serializers.CharField(
         write_only=True, validators=[validate_password], style={"input_type": "password"}
     )
@@ -133,6 +147,8 @@ class ActivityLogQuerySerializer(serializers.Serializer):
 
 class LoginSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
+        # В базе email хранится в нижнем регистре.
+        attrs["email"] = attrs.get("email", "").strip().lower()
         data = super().validate(attrs)
         data["user"] = UserSerializer(self.user).data
         return data
