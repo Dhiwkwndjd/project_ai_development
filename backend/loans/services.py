@@ -24,6 +24,7 @@ from users.services import log_action
 
 DEFAULT_LOAN_DAYS = 14
 MAX_LOAN_DAYS = 30
+MAX_START_AHEAD_DAYS = 365
 
 NO_COPIES_DETAIL = "На эти даты нет свободных экземпляров. Можно встать в очередь."
 
@@ -48,6 +49,11 @@ def resolve_period(start_date=None, due_date=None):
 
     if start < today:
         raise LoanError("Дата начала не может быть в прошлом", "invalid_period")
+    if start > today + timedelta(days=MAX_START_AHEAD_DAYS):
+        raise LoanError(
+            f"Бронь можно начать не позже чем через {MAX_START_AHEAD_DAYS} дней",
+            "invalid_period",
+        )
 
     due = due_date or start + timedelta(days=DEFAULT_LOAN_DAYS)
 

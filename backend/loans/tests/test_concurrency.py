@@ -8,9 +8,11 @@
 """
 
 import threading
+from datetime import timedelta
 
 from django.db import close_old_connections
 from django.test import TransactionTestCase
+from django.utils import timezone
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -34,13 +36,15 @@ class ConcurrentBookingTests(TransactionTestCase):
             email="race@test.local", password="StrongPass123!", full_name="Читатель Гонки"
         )
         self.access = str(RefreshToken.for_user(self.reader).access_token)
+        # Дата от сегодняшней: фиксированная дата рано или поздно выходит за допустимый период.
+        self.start_date = (timezone.localdate() + timedelta(days=10)).isoformat()
 
     def book_copy(self):
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.access}")
         return client.post(
             LOANS_URL,
-            {"copy_id": self.copy.id, "start_date": "2030-01-10"},
+                {"copy_id": self.copy.id, "start_date": self.start_date},
             format="json",
         )
 
